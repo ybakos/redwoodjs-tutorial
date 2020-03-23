@@ -33,6 +33,12 @@ const ContactPage = (props) => {
   return (
     <BlogLayout>
       <Form onSubmit={onSubmit} validation={{ mode: 'onBlur' }}>
+        {error && (
+          <div style={{ color: 'red' }}>
+            {"We couldn't send your message: "}
+            {error.message}
+          </div>
+        )}
         <Label
           name="name"
           style={{ display: 'block'}}
@@ -61,10 +67,10 @@ const ContactPage = (props) => {
           errorStyle={{ display: 'block', borderColor: 'red' }}
           validation={{
             required: true,
-            pattern: {
-              value: /[^@]+@[^\.]+\..+/,
-              message: 'Please enter a valid email address'
-            }
+            // pattern: {
+            //   value: /[^@]+@[^\.]+\..+/,
+            //   message: 'Please enter a valid email address'
+            // }
           }}
         />
         <FieldError name="email" style={{ color: 'red' }} />
