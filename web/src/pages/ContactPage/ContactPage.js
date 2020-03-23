@@ -6,11 +6,23 @@ import {
   FieldError,
   Label
 } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
 import BlogLayout from 'src/layouts/BlogLayout'
+
+const CREATE_CONTACT = gql`
+  mutation CreateContactMutation($input: ContactInput!) {
+    createContact(input: $input) {
+      id
+    }
+  }
+`
 
 const ContactPage = (props) => {
 
+  const [create] = useMutation(CREATE_CONTACT)
+
   const onSubmit = (data) => {
+    create({ variables: { input: data }})
     console.log(data)
   }
 
