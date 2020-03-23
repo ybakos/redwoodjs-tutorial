@@ -4,7 +4,8 @@ import {
   TextAreaField,
   Submit,
   FieldError,
-  Label
+  Label,
+  FormError
 } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
 import BlogLayout from 'src/layouts/BlogLayout'
@@ -32,13 +33,11 @@ const ContactPage = (props) => {
 
   return (
     <BlogLayout>
-      <Form onSubmit={onSubmit} validation={{ mode: 'onBlur' }}>
-        {error && (
-          <div style={{ color: 'red' }}>
-            {"We couldn't send your message: "}
-            {error.message}
-          </div>
-        )}
+      <Form onSubmit={onSubmit} validation={{ mode: 'onBlur' }} error={error}>
+        <FormError
+          error={error}
+          wrapperStyle={{ color: 'red', backgroundColor: 'lavenderblush' }}
+        />
         <Label
           name="name"
           style={{ display: 'block'}}
