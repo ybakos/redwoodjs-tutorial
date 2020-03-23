@@ -19,7 +19,11 @@ const CREATE_CONTACT = gql`
 
 const ContactPage = (props) => {
 
-  const [create] = useMutation(CREATE_CONTACT)
+  const [create, {loading, error}] = useMutation(CREATE_CONTACT, {
+    onCompleted: () => {
+      alert('Thank you for your submission!')
+    }
+  })
 
   const onSubmit = (data) => {
     create({ variables: { input: data }})
@@ -80,7 +84,7 @@ const ContactPage = (props) => {
         />
         <FieldError name="message" style={{ color: 'red' }} />
 
-        <Submit style={{ display: 'block' }}>Save</Submit>
+        <Submit style={{ display: 'block' }} disabled={loading}>Save</Submit>
       </Form>
     </BlogLayout>
   )
